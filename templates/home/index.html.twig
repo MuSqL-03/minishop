@@ -1,0 +1,202 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}MiniShop - Votre boutique en ligne{% endblock %}
+
+{% block body %}
+
+{# HERO SECTION #}
+<section style="background: #f7f4ef;">
+
+    <div class="container py-4 py-lg-5">
+
+        {# PHOTO EN HAUT #}
+        <div class="text-center mb-5">
+            <img
+                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600"
+                class="img-fluid rounded-4 shadow"
+                alt="Boutique MiniShop"
+                style="width:100%; height:450px; object-fit:cover;">
+        </div>
+
+        {# TEXTE EN BAS #}
+        <div class="text-center mx-auto pb-4" style="max-width:750px;">
+
+            <span class="text-uppercase fw-bold text-accent small">
+                <i class="bi bi-stars me-2"></i>Bienvenue chez MiniShop
+            </span>
+
+            <h1 class="display-3 fw-bold mt-3">
+                Le style qui vous ressemble.
+            </h1>
+
+            <p class="fs-5 text-secondary mt-3">
+                Découvrez notre sélection de produits soigneusement
+                choisis pour améliorer votre quotidien.
+            </p>
+
+            <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+
+                <a href="{{ path('app_product_index') }}" class="btn btn-shop">
+                    Découvrir la boutique
+                    <i class="bi bi-arrow-right ms-2"></i>
+                </a>
+
+                <a href="#avantages" class="btn btn-outline-dark px-4 py-3">
+                    En savoir plus
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+{# PRODUCTS SECTION #}
+<section class="container py-5 my-lg-4">
+
+    <div class="text-center mb-5">
+        <span class="text-uppercase text-accent fw-bold small">
+            Notre sélection
+        </span>
+
+        <h2 class="section-title mt-2 mb-3">
+            Découvrez nos produits
+        </h2>
+
+        <p class="text-secondary">
+            Trouvez les articles qui correspondent à vos envies.
+        </p>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-md-4">
+            <div class="card product-card h-100">
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700"
+                    class="card-img-top"
+                    alt="Montre élégante">
+
+                <div class="card-body p-4">
+                    <span class="text-accent small fw-bold">ACCESSOIRES</span>
+                    <h5 class="fw-bold mt-2">Montre élégante</h5>
+                    <p class="text-secondary">
+                        Un accessoire intemporel pour votre quotidien.
+                    </p>
+                    <a href="{{ path('app_product_index') }}"
+                       class="btn btn-outline-dark w-100">
+                        Découvrir <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card product-card h-100">
+                <img
+                    src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"
+                    class="card-img-top"
+                    alt="Chaussures sport">
+
+                <div class="card-body p-4">
+                    <span class="text-accent small fw-bold">MODE</span>
+                    <h5 class="fw-bold mt-2">Chaussures sport</h5>
+                    <p class="text-secondary">
+                        Confort et style pour accompagner vos journées.
+                    </p>
+                    <a href="{{ path('app_product_index') }}"
+                       class="btn btn-outline-dark w-100">
+                        Découvrir <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card product-card h-100">
+                <img
+                    src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=700"
+                    class="card-img-top"
+                    alt="Casque audio">
+
+                <div class="card-body p-4">
+                    <span class="text-accent small fw-bold">TECHNOLOGIE</span>
+                    <h5 class="fw-bold mt-2">Casque audio</h5>
+                    <p class="text-secondary">
+                        Profitez de vos musiques avec style.
+                    </p>
+                    <a href="{{ path('app_product_index') }}"
+                       class="btn btn-outline-dark w-100">
+                        Découvrir <i class="bi bi-arrow-right ms-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+        <a href="{{ path('app_product_index') }}" class="btn btn-shop">
+            Voir tous les produits
+            <i class="bi bi-arrow-right ms-2"></i>
+        </a>
+    </div>
+
+</section>
+
+
+{# ADVANTAGES SECTION #}
+<section id="avantages" class="py-5" style="background:#f7f4ef;">
+    <div class="container py-4">
+
+        <div class="text-center mb-5">
+            <span class="text-uppercase text-accent fw-bold small">
+                Pourquoi MiniShop ?
+            </span>
+            <h2 class="section-title mt-2">
+                Une expérience simple
+            </h2>
+        </div>
+
+        <div class="row g-4 text-center">
+
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="bi bi-bag-check display-4 text-accent"></i>
+                    <h5 class="fw-bold mt-3">Commande facile</h5>
+                    <p class="text-secondary">
+                        Ajoutez vos produits au panier et finalisez votre commande simplement.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="bi bi-gem display-4 text-accent"></i>
+                    <h5 class="fw-bold mt-3">Produits sélectionnés</h5>
+                    <p class="text-secondary">
+                        Retrouvez une sélection de produits pour vos envies.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="p-4">
+                    <i class="bi bi-phone display-4 text-accent"></i>
+                    <h5 class="fw-bold mt-3">Site responsive</h5>
+                    <p class="text-secondary">
+                        Profitez de votre boutique sur ordinateur, tablette et téléphone.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+{% endblock %}

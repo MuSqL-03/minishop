@@ -1,24 +1,306 @@
+
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+    <title>{% block title %}MiniShop - Boutique en ligne{% endblock %}</title>
 
-        {% set frankenphp_hot_reload = app.request.server.get('FRANKENPHP_HOT_RELOAD') %}
-        {% if frankenphp_hot_reload %}
-        <meta name="frankenphp-hot-reload:url" content="{{ frankenphp_hot_reload }}">
-        <script src="https://cdn.jsdelivr.net/npm/idiomorph"></script>
-        <script src="https://cdn.jsdelivr.net/npm/frankenphp-hot-reload/+esm" type="module"></script>
-        {% endif %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-    </body>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #252525;
+            --accent: #b58b55;
+            --background: #f8f7f4;
+            --text: #333333;
+        }
+
+        body {
+            background: #ffffff;
+            color: var(--text);
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            padding: 18px 0;
+            background: white;
+        }
+
+        .navbar-brand {
+            font-size: 29px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            color: var(--primary);
+        }
+
+        .navbar-brand span {
+            color: var(--accent);
+        }
+
+        .nav-link {
+            color: #444;
+            font-weight: 600;
+            margin: 0 10px;
+            transition: .3s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: var(--accent);
+        }
+
+        .nav-icon {
+            color: var(--primary);
+            font-size: 21px;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        .nav-icon:hover {
+            color: var(--accent);
+        }
+
+        /* BUTTONS */
+        .btn-shop {
+            background: var(--primary);
+            color: white;
+            border: 1px solid var(--primary);
+            padding: 13px 30px;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: .3s;
+        }
+
+        .btn-shop:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* TITLES */
+        .section-title {
+            font-size: 30px;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 35px;
+        }
+
+        /* PRODUCT CARDS */
+        .product-card {
+            border: 1px solid #eeeeee;
+            border-radius: 12px;
+            overflow: hidden;
+            background: white;
+            transition: .3s;
+        }
+
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 30px rgba(0,0,0,.08);
+        }
+
+        .product-card img {
+            height: 260px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        /* GENERAL */
+        .page-section {
+            padding: 65px 0;
+        }
+
+        .text-accent {
+            color: var(--accent);
+        }
+
+        .bg-soft {
+            background: var(--background);
+        }
+
+        .card {
+            border-radius: 12px;
+        }
+
+        .form-control {
+            padding: 12px;
+            border-radius: 7px;
+            border: 1px solid #dddddd;
+        }
+
+        .form-control:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 .2rem rgba(181,139,85,.15);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #222222;
+            color: white;
+            padding: 55px 0 25px;
+            margin-top: 80px;
+        }
+
+        footer h4 {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        footer .footer-accent {
+            color: var(--accent);
+        }
+
+        footer p,
+        footer small {
+            color: #bbbbbb;
+        }
+
+        footer a {
+            color: #bbbbbb;
+            text-decoration: none;
+            transition: .3s;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .navbar-brand {
+                font-size: 25px;
+            }
+
+            .section-title {
+                font-size: 25px;
+            }
+        }
+    </style>
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg sticky-top border-bottom shadow-sm">
+        <div class="container">
+
+            <a class="navbar-brand" href="{{ path('app_home') }}">
+                MiniShop<span>.</span>
+            </a>
+
+            <button class="navbar-toggler" type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarMenu"
+                    aria-controls="navbarMenu"
+                    aria-expanded="false"
+                    aria-label="Ouvrir le menu">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarMenu">
+
+                <ul class="navbar-nav mx-auto gap-lg-3">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_home') }}">
+                            Accueil
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_product_index') }}">
+                            Boutique
+                        </a>
+                    </li>
+
+                </ul>
+
+                <div class="d-flex gap-4 align-items-center mt-3 mt-lg-0">
+
+                    {% set cartData = app.session.get('cart', {}) %}
+                    {% set cartCount = 0 %}
+
+                    {% for quantity in cartData %}
+                        {% set cartCount = cartCount + quantity %}
+                    {% endfor %}
+
+                    <a href="{{ path('app_cart_index') }}"
+                       class="nav-icon position-relative"
+                       aria-label="Mon panier">
+
+                        <i class="bi bi-bag"></i>
+
+                        {% if cartCount > 0 %}
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                                  style="font-size: 10px;">
+                                {{ cartCount }}
+                            </span>
+                        {% endif %}
+
+                    </a>
+
+                    <a href="{{ path('app_cart_index') }}"
+                       class="btn btn-shop btn-sm">
+                        Mon panier
+                    </a>
+
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    {% block body %}{% endblock %}
+
+    <footer>
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-md-6">
+                    <h4>MiniShop<span class="footer-accent">.</span></h4>
+                    <p class="mt-3">
+                        Découvrez une expérience shopping simple,
+                        agréable et accessible.
+                    </p>
+                </div>
+
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Navigation</h6>
+                    <p><a href="{{ path('app_home') }}">Accueil</a></p>
+                    <p><a href="{{ path('app_product_index') }}">Boutique</a></p>
+                    <p><a href="{{ path('app_cart_index') }}">Mon panier</a></p>
+                </div>
+
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">MiniShop</h6>
+                    <p>Une boutique pensée pour vous.</p>
+                    <p><i class="bi bi-bag-check me-2"></i>Commandes en ligne</p>
+                </div>
+
+            </div>
+
+            <hr class="border-secondary my-4">
+
+            <div class="text-center">
+                <small>
+                    © {{ "now"|date("Y") }} MiniShop.
+                    Tous droits réservés.
+                </small>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    {% block javascripts %}{% endblock %}
+
+</body>
 </html>

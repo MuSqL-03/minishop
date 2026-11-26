@@ -1,0 +1,128 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Boutique - MiniShop{% endblock %}
+
+{% block body %}
+
+{# BANNIERE #}
+<section class="py-5" style="background:#f7f4ef;">
+    <div class="container text-center py-4">
+
+        <span class="text-uppercase text-accent fw-bold small">
+            Découvrez MiniShop
+        </span>
+
+        <h1 class="display-4 fw-bold mt-3">
+            Notre boutique
+        </h1>
+
+        <p class="text-secondary fs-5 mt-3 mb-0">
+            Découvrez notre collection et trouvez vos produits préférés.
+        </p>
+
+    </div>
+</section>
+
+
+{# LISTE DES PRODUITS #}
+<section class="container py-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold mb-1">Tous nos produits</h2>
+            <p class="text-secondary mb-0">
+                Prenez le temps de découvrir notre sélection.
+            </p>
+        </div>
+
+        <span class="badge rounded-pill text-dark px-3 py-2"
+              style="background:#f0e7da;">
+            <i class="bi bi-grid me-1"></i>
+            Notre collection
+        </span>
+    </div>
+
+    <div class="row g-4">
+
+        {% for product in products %}
+
+            <div class="col-sm-6 col-lg-4">
+
+                <div class="card product-card h-100">
+
+                    {# IMAGE #}
+                    {% if product.image %}
+                        <img
+                            src="{{ product.image }}"
+                            class="card-img-top"
+                            alt="{{ product.name }}"
+                            loading="lazy"
+                        >
+                    {% else %}
+                        <div class="bg-light d-flex align-items-center justify-content-center"
+                             style="height:260px;">
+                            <i class="bi bi-image display-3 text-secondary"></i>
+                        </div>
+                    {% endif %}
+
+                    {# INFORMATIONS #}
+                    <div class="card-body p-4 d-flex flex-column">
+
+                        <span class="text-uppercase text-accent small fw-bold">
+                            MiniShop sélection
+                        </span>
+
+                        <h5 class="fw-bold mt-2">
+                            {{ product.name }}
+                        </h5>
+
+                        <p class="text-secondary small flex-grow-1">
+                            {{ product.description|length > 100
+                                ? product.description|slice(0, 100) ~ '...'
+                                : product.description }}
+                        </p>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+
+                            <h5 class="fw-bold mb-0">
+                                {{ product.price|number_format(2, ',', ' ') }} €
+                            </h5>
+
+                            <a href="{{ path('app_product_show', {'id': product.id}) }}"
+                               class="btn btn-shop btn-sm">
+                                Découvrir
+                                <i class="bi bi-arrow-right ms-1"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        {% else %}
+
+            <div class="col-12 text-center py-5">
+
+                <i class="bi bi-box-seam display-1 text-secondary"></i>
+
+                <h4 class="fw-bold mt-3">
+                    Aucun produit disponible
+                </h4>
+
+                <p class="text-secondary">
+                    Revenez bientôt découvrir notre collection.
+                </p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+{% endblock %}

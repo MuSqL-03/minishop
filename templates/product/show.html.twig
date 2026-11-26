@@ -1,0 +1,172 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }} - MiniShop{% endblock %}
+
+{% block body %}
+
+<div class="container py-5">
+
+    {# RETOUR BOUTIQUE #}
+    <a href="{{ path('app_product_index') }}"
+       class="btn btn-outline-dark mb-5">
+        <i class="bi bi-arrow-left me-2"></i>
+        Retour à la boutique
+    </a>
+
+    <div class="row g-5 align-items-center">
+
+        {# IMAGE DU PRODUIT #}
+        <div class="col-lg-6">
+
+            <div class="rounded-4 overflow-hidden shadow-sm"
+                 style="background:#f7f4ef;">
+
+                {% if product.image %}
+
+                    <img
+                        src="{{ product.image }}"
+                        alt="{{ product.name }}"
+                        class="w-100"
+                        style="height:500px; object-fit:cover;"
+                    >
+
+                {% else %}
+
+                    <div class="d-flex align-items-center justify-content-center"
+                         style="height:500px;">
+
+                        <div class="text-center text-secondary">
+                            <i class="bi bi-image display-1"></i>
+                            <p class="mt-3">Pas d'image disponible</p>
+                        </div>
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+        {# INFORMATIONS DU PRODUIT #}
+        <div class="col-lg-6">
+
+            <span class="text-uppercase fw-bold text-accent small">
+                <i class="bi bi-stars me-2"></i>
+                Collection MiniShop
+            </span>
+
+            <h1 class="display-5 fw-bold mt-3 mb-4">
+                {{ product.name }}
+            </h1>
+
+            <p class="text-secondary fs-5">
+                {{ product.description }}
+            </p>
+
+            <div class="my-4">
+                <h2 class="fw-bold mb-0">
+                    {{ product.price|number_format(2, ',', ' ') }} €
+                </h2>
+                <small class="text-secondary">
+                    Prix TTC
+                </small>
+            </div>
+
+            <hr class="my-4">
+
+            {# STOCK #}
+            <div class="d-flex align-items-center gap-2 mb-4">
+
+                {% if product.stock > 0 %}
+
+                    <i class="bi bi-check-circle-fill text-success"></i>
+
+                    <span class="text-success fw-semibold">
+                        En stock
+                    </span>
+
+                    <span class="text-secondary small">
+                        ({{ product.stock }} disponible(s))
+                    </span>
+
+                {% else %}
+
+                    <i class="bi bi-x-circle-fill text-danger"></i>
+
+                    <span class="text-danger fw-semibold">
+                        Rupture de stock
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            {# AJOUT AU PANIER #}
+            {% if product.stock > 0 %}
+
+                <form
+                    action="{{ path('app_cart_add', {'id': product.id}) }}"
+                    method="POST">
+
+                    <button type="submit"
+                            class="btn btn-shop btn-lg w-100 py-3">
+
+                        <i class="bi bi-cart-plus me-2"></i>
+                        Ajouter au panier
+
+                    </button>
+
+                </form>
+
+            {% else %}
+
+                <button class="btn btn-secondary btn-lg w-100 py-3"
+                        disabled>
+                    Indisponible
+                </button>
+
+            {% endif %}
+
+
+            {# AVANTAGES #}
+            <div class="row g-3 mt-4">
+
+                <div class="col-6">
+                    <div class="p-3 rounded-3 text-center"
+                         style="background:#f7f4ef;">
+
+                        <i class="bi bi-shield-check fs-4"></i>
+
+                        <p class="small fw-semibold mb-0 mt-2">
+                            Achat sécurisé
+                        </p>
+
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="p-3 rounded-3 text-center"
+                         style="background:#f7f4ef;">
+
+                        <i class="bi bi-box-seam fs-4"></i>
+
+                        <p class="small fw-semibold mb-0 mt-2">
+                            Produits sélectionnés
+                        </p>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
